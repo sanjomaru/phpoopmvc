@@ -59,6 +59,11 @@ echo "<br>";
 <?php
 //GETTERS AND SETTERS 
 class newUser{
+
+    // To access private property, you need to use getters and setters
+    // you can create a manual function with returning $this->propertyname;
+    // or you can use magic methods __get and __set
+
     private $name;
     private $age;
 
@@ -109,7 +114,7 @@ echo "<br>";
 echo $newUser->getName();
 echo "<br>";
 ?>
-<h3>This is a magic property __get()</h3>
+<h3>This is a magic property __get() and __set()</h3>
 <?php
 
 $newUser->__set('name','Zorro');
@@ -118,6 +123,57 @@ echo $newUser->__get('name');
 echo "<br>";
 echo $newUser->__get('age');
 ?>
+
+<h3>Class Inheritance</h3>
+
+<?php
+
+class protectedUser{
+    protected $name;
+    protected $age;
+    
+    public function __construct($name = '', $age = ''){
+        $this->name = $name;
+        $this->age = $age;
+    }
+}
+
+class protectedUser2 extends protectedUser{
+    private $secondUserName;
+    private $secondUserAge;
+
+    public function __construct($name = '', $age = '', $sUname = '', $suAge = ''){
+        parent::__construct($name, $age);
+        $this->secondUserAge = $suAge;
+        $this->secondUsername = $sUname;
+    }
+    
+    public function showName(){
+        return 'The First user name is : '.$this->name.'. The Second user name is : '.$this->secondUsername;
+    }
+
+    public function showAge(){
+        return $this->age;
+    }
+
+    public function secondShowAge($psuAge = null){
+        if($psuAge != null){
+            return $this->secondUserAge = $psuAge;
+        }
+        return $this->secondUserAge;
+    }
+}
+
+$puser = new protectedUser2('sd', 100, 'suname', 11232);
+
+echo $puser->showName();
+echo "<br>";
+echo $puser->showAge();
+echo "<br>";
+echo $puser->secondShowAge();
+
+?>
+
 
 </body>
 </html>
