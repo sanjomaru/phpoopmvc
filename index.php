@@ -125,7 +125,7 @@ echo $newUser->__get('age');
 ?>
 
 <h3>Class Inheritance</h3>
-
+<h4>For class inheritance use ::parent_construct()</h4>
 <?php
 
 class protectedUser{
@@ -174,6 +174,31 @@ echo $puser->secondShowAge();
 
 ?>
 
+<h3>Static Methods and Properties</h3>
+<h4>You can access static properties and methods by using classname::property or clasname::methodname() for property dont forget to use $ sign, classname::$property</h4>
+<?php
+class smp{
+    public $name;
+    public $age;
+    public static $minPass = 5;
+
+    public static function verifyPass($password){
+        if(strlen($password) >= self::$minPass){
+            return true;
+        }else{
+            return false;
+        }
+    }
+}
+
+$passwords = 112321312;
+if(smp::verifyPass($passwords)){
+    echo "Password Valid.";
+}else{
+    echo "Password too short.";
+}
+
+?>
 
 </body>
 </html>
